@@ -27,7 +27,7 @@ function App() {
       {isLoading && <LoadingSpinner />}
 
       {/* 2. Main Page Layout structure */}
-      <div className="min-h-screen w-full overflow-x-hidden bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300">
+      <div className="min-h-screen w-full overflow-x-clip bg-slate-50 text-slate-800 dark:bg-transparent dark:text-slate-100 transition-colors duration-300">
         
         {/* Responsive Navbar */}
         <Navbar />

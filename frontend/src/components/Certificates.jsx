@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Award, ExternalLink, Calendar, ShieldCheck, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/_/backend' : 'http://localhost:5000');
 
 // High-quality local fallback data if backend is offline
 const localMockCertificates = [
@@ -54,7 +57,7 @@ const Certificates = () => {
   useEffect(() => {
     const fetchCertificates = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/certificates');
+        const res = await axios.get(`${API_BASE_URL}/api/certificates`);
         if (res.data && res.data.success && res.data.data.length > 0) {
           setCertificates(res.data.data);
         } else {
@@ -71,7 +74,7 @@ const Certificates = () => {
   }, []);
 
   return (
-    <section id="certificates" className="py-20 bg-white dark:bg-slate-900 transition-colors">
+    <section id="certificates" className="py-20 bg-white dark:bg-transparent transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -94,7 +97,7 @@ const Certificates = () => {
             {certificates.map((cert) => (
               <div
                 key={cert._id}
-                className="group bg-slate-50 dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-150/70 dark:border-slate-800/80 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+                className="group bg-slate-50 dark:bg-slate-900/40 dark:border-slate-800/80 backdrop-blur-md rounded-2xl overflow-hidden border border-slate-150/70 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
               >
                 {/* Certificate Visual Image */}
                 <div className="relative h-48 overflow-hidden bg-slate-200 dark:bg-slate-900">
@@ -164,29 +167,45 @@ const Certificates = () => {
         )}
 
         {/* Dynamic Image Popup Preview Modal */}
-        {activeModalImage && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in">
-            <div className="relative max-w-4xl w-full bg-white dark:bg-slate-850 rounded-2xl overflow-hidden p-2 shadow-2xl">
-              
-              {/* Close trigger button */}
-              <button
-                onClick={() => setActiveModalImage(null)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-slate-900/65 text-white hover:bg-slate-900 transition-colors z-10"
-                aria-label="Close Preview"
+        <AnimatePresence>
+          {activeModalImage && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setActiveModalImage(null)} // Close modal when clicking on the backdrop
+              className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm cursor-zoom-out"
+            >
+              <motion.div 
+                initial={{ scale: 0.9, opacity: 0, y: 15 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.9, opacity: 0, y: 15 }}
+                transition={{ type: "spring", duration: 0.45, bounce: 0.3 }}
+                onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the card
+                className="relative max-w-4xl w-full bg-white dark:bg-slate-850 rounded-2xl overflow-hidden p-2 shadow-2xl cursor-default"
               >
-                <X className="w-4 h-4" />
-              </button>
+                
+                {/* Close trigger button */}
+                <button
+                  onClick={() => setActiveModalImage(null)}
+                  className="absolute top-4 right-4 p-2 rounded-full bg-slate-900/65 text-white hover:bg-slate-900 transition-colors z-10"
+                  aria-label="Close Preview"
+                >
+                  <X className="w-4 h-4" />
+                </button>
 
-              {/* Certificate Image Frame */}
-              <img
-                src={activeModalImage}
-                alt="Certificate Full Size Preview"
-                className="w-full h-auto rounded-lg max-h-[80vh] object-contain"
-              />
+                {/* Certificate Image Frame */}
+                <img
+                  src={activeModalImage}
+                  alt="Certificate Full Size Preview"
+                  className="w-full h-auto rounded-lg max-h-[80vh] object-contain"
+                />
 
-            </div>
-          </div>
-        )}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       </div>
     </section>

@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Github, ExternalLink, Code2, BarChart3 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Github, ExternalLink, Code2, BarChart3 } from 'lucide-react';
 import axios from 'axios';
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/_/backend' : 'http://localhost:5000');
 
 // High-quality local fallback data if backend is offline or loading fails
 const localMockProjects = [
@@ -8,7 +10,7 @@ const localMockProjects = [
   {
     _id: 'mock-s1',
     title: 'Online Quiz Platform',
-    description: 'Built a full-stack web application utilizing MongoDB, Express.js, React, Node.js (MERN), and Tailwind CSS. Developed robust JWT authentication, dynamic quiz handling logic, and custom score tracking dashboards.',
+    description: 'Built a full-stack MERN quiz platform featuring robust JWT user authentication, dynamic quiz handling logic, score dashboards, and fluid Tailwind CSS layouts.',
     category: 'Software Development',
     techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS'],
     githubUrl: 'https://github.com/example/online-quiz',
@@ -20,7 +22,7 @@ const localMockProjects = [
   {
     _id: 'mock-d1',
     title: 'Movie Recommendation System',
-    description: 'Developed a content-based movie recommendation system using cosine similarity. Cleaned and processed 5,000+ movie records in Jupyter Notebook, conducted feature extraction, and built an interactive Streamlit interface.',
+    description: 'Developed a content-based recommendation system using cosine similarity. Cleaned and analyzed 5,000+ movie records, extracted structural features, and built an interactive Streamlit UI.',
     category: 'Data Analyst',
     techStack: ['Python', 'Streamlit', 'Cosine Similarity', 'Pandas', 'Scikit-learn'],
     githubUrl: 'https://github.com/example/movie-recommendation',
@@ -30,7 +32,7 @@ const localMockProjects = [
   {
     _id: 'mock-d2',
     title: 'Weather Dashboard',
-    description: 'Developed an interactive weather dashboard using Microsoft Power BI. Cleaned meteorological metrics using Power Query, developed DAX measures, and visualized live temperature, humidity, AQI, and rainfall.',
+    description: 'Designed an interactive Power BI weather dashboard. Formatted data utilizing Power Query, developed analytical measures in DAX, and visualized live temperature, humidity, AQI, and rainfall.',
     category: 'Data Analyst',
     techStack: ['Power BI', 'Power Query', 'DAX', 'Data Analysis', 'Data Cleaning'],
     githubUrl: 'https://github.com/example/weather-dashboard',
@@ -40,7 +42,7 @@ const localMockProjects = [
   {
     _id: 'mock-d3',
     title: 'E-Commerce Sales Dashboard',
-    description: 'An interactive, multi-sheet dashboard analyzing online sales operations, profit margins, product performances, and customer retention. Supports regional and category-level filtering.',
+    description: 'Created a multi-sheet Power BI dashboard analyzing e-commerce operations, profit margins, product performances, and customer retention metrics.',
     category: 'Data Analyst',
     techStack: ['Excel', 'Power BI', 'SQL', 'Data Modeling'],
     githubUrl: 'https://github.com/example/sales-dashboard',
@@ -52,16 +54,13 @@ const localMockProjects = [
 const ProjectsSlider = () => {
   const [projects, setProjects] = useState([]);
   const [activeCategory, setActiveCategory] = useState('All');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const autoPlayTimer = useRef(null);
 
   // Fetch projects from DB
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/projects');
+        const res = await axios.get(`${API_BASE_URL}/api/projects`);
         if (res.data && res.data.success && res.data.data.length > 0) {
           setProjects(res.data.data);
         } else {
@@ -77,43 +76,11 @@ const ProjectsSlider = () => {
     fetchProjects();
   }, []);
 
-  // Filter projects by selected tab
+  // Filter projects by selected category
   const filteredProjects = projects.filter(project => {
     if (activeCategory === 'All') return true;
     return project.category === activeCategory;
   });
-
-  // Reset index when changing category filters
-  useEffect(() => {
-    setCurrentIndex(0);
-  }, [activeCategory]);
-
-  // Setup auto-scroll effect
-  useEffect(() => {
-    if (filteredProjects.length <= 1) return;
-
-    if (!isHovered) {
-      autoPlayTimer.current = setInterval(() => {
-        handleNext();
-      }, 4000); // Transitions slide every 4 seconds
-    }
-
-    return () => {
-      if (autoPlayTimer.current) clearInterval(autoPlayTimer.current);
-    };
-  }, [currentIndex, isHovered, filteredProjects.length]);
-
-  const handleNext = () => {
-    setCurrentIndex(prevIndex => 
-      prevIndex === filteredProjects.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex(prevIndex => 
-      prevIndex === 0 ? filteredProjects.length - 1 : prevIndex - 1
-    );
-  };
 
   if (isLoading) {
     return (
@@ -123,26 +90,23 @@ const ProjectsSlider = () => {
     );
   }
 
-  // Active Project item
-  const activeProject = filteredProjects[currentIndex] || null;
-
   return (
-    <section id="projects" className="py-20 bg-slate-100/50 dark:bg-slate-900/50 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="py-20 bg-white dark:bg-transparent transition-colors">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
           <span className="text-sm font-bold tracking-wider text-indigo-600 dark:text-teal-400 uppercase">
             Curated Works
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 dark:text-white">
-            Academic & Personal Projects
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 dark:text-white uppercase tracking-wide">
+            Projects
           </h2>
           <div className="h-1.5 w-20 bg-indigo-600 dark:bg-teal-400 mx-auto rounded-full"></div>
         </div>
 
         {/* Category Tabs/Filter buttons */}
-        <div className="flex justify-center items-center gap-3 mb-10">
+        <div className="flex justify-center items-center gap-3 mb-16">
           {['All', 'Software Development', 'Data Analyst'].map(category => (
             <button
               key={category}
@@ -162,126 +126,131 @@ const ProjectsSlider = () => {
           ))}
         </div>
 
-        {/* Dynamic Project Carousel Slider Container */}
-        {filteredProjects.length > 0 && activeProject ? (
-          <div 
-            className="relative"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            
-            {/* Project Frame Box */}
-            <div className="bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-lg border border-slate-100 dark:border-slate-700/70 transition-all duration-500 min-h-[420px] flex flex-col lg:flex-row">
+        {/* Sticky Stack Cards Container */}
+        {filteredProjects.length > 0 ? (
+          <div className="flex flex-col gap-12 sm:gap-20 pb-20 relative">
+            {filteredProjects.map((project, idx) => {
               
-              {/* Left Side: Images section */}
-              <div className="w-full lg:w-1/2 relative overflow-hidden group h-64 lg:h-auto min-h-[250px]">
-                <img
-                  src={activeProject.image}
-                  alt={activeProject.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                
-                {/* Visual Accent Category Badge */}
-                <span className="absolute top-4 left-4 inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-lg bg-indigo-600/90 text-white dark:bg-teal-500/90 dark:text-slate-950 backdrop-blur-sm">
-                  {activeProject.category === 'Software Development' ? <Code2 className="w-3 h-3" /> : <BarChart3 className="w-3 h-3" />}
-                  {activeProject.category}
-                </span>
-              </div>
-
-              {/* Right Side: Details section */}
-              <div className="w-full lg:w-1/2 p-8 sm:p-10 flex flex-col justify-between space-y-6">
-                
-                <div className="space-y-4">
-                  
-                  {/* Category Tracker Indicators */}
-                  <div className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
-                    Project {currentIndex + 1} of {filteredProjects.length}
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight">
-                    {activeProject.title}
-                  </h3>
-
-                  {/* Short Description */}
-                  <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                    {activeProject.description}
-                  </p>
-
-                  {/* Tech stack badges */}
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {activeProject.techStack.map((tech, idx) => (
-                      <span
-                        key={idx}
-                        className="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300"
-                      >
-                        {tech}
+              return (
+                <div 
+                  key={project._id || idx}
+                  className="w-full bg-slate-950 text-white rounded-3xl border border-slate-850 shadow-2xl relative overflow-hidden transition-all duration-300 transform hover:scale-[1.005]"
+                  style={{
+                    position: 'sticky',
+                    // On desktop/tablet, stack cards at incrementally increasing top offsets
+                    // leaving previous card headers exposed (about 76px high)
+                    top: `calc(90px + ${idx * 76}px)`,
+                    zIndex: (idx + 1) * 10
+                  }}
+                >
+                  {/* Card Header Row (Fixed height structure for clean sticky matching) */}
+                  <div className="h-[76px] px-6 sm:px-8 border-b border-slate-900 flex items-center justify-between">
+                    <div className="flex items-center gap-4 sm:gap-6">
+                      {/* Big Number */}
+                      <span className="text-2xl sm:text-3xl font-black text-slate-700 tracking-tight">
+                        {String(idx + 1).padStart(2, '0')}
                       </span>
-                    ))}
+                      {/* Title & Info */}
+                      <div className="text-left">
+                        <span className="text-[9px] font-extrabold text-slate-500 uppercase tracking-widest block">
+                          Client / Track
+                        </span>
+                        <h3 className="text-sm sm:text-base font-extrabold text-white mt-0.5 tracking-wide">
+                          {project.title}
+                        </h3>
+                      </div>
+                    </div>
+
+                    {/* Live Link Button inside header */}
+                    {project.liveUrl && project.liveUrl !== '#' && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[10px] font-bold border border-slate-800 hover:border-slate-600 text-slate-350 hover:text-white bg-slate-900 hover:bg-slate-850 active:scale-95 transition-all shadow-sm"
+                      >
+                        Live Project
+                      </a>
+                    )}
                   </div>
 
+                  {/* Card Content Grid */}
+                  <div className="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                    
+                    {/* Left Details Column (Span 6) */}
+                    <div className="lg:col-span-6 flex flex-col justify-between space-y-6 text-left">
+                      <div className="space-y-4">
+                        <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+                          {project.description}
+                        </p>
+
+                        {/* Technologies List */}
+                        <div className="space-y-2.5">
+                          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest block">
+                            Technologies Used
+                          </span>
+                          <div className="flex flex-wrap gap-2">
+                            {project.techStack.map((tech, techIdx) => (
+                              <span
+                                key={techIdx}
+                                className="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-900 text-slate-300 border border-slate-850"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Repository Links */}
+                      <div className="pt-4 border-t border-slate-900">
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-450 hover:text-indigo-400 transition-colors"
+                        >
+                          <Github className="w-4 h-4" /> GitHub Repository
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Right Perspective Images Column (Span 6) */}
+                    <div className="lg:col-span-6 flex items-center justify-center">
+                      <div className="flex gap-3 h-56 sm:h-64 lg:h-72 w-full">
+                        {/* Main Image (Left, 65% width) */}
+                        <div className="w-2/3 h-full overflow-hidden rounded-2xl border border-slate-900 relative group">
+                          <img
+                            src={project.image}
+                            alt={`${project.title} screenshot`}
+                            className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-500"
+                          />
+                        </div>
+                        
+                        {/* Cropped Stacked Details (Right, 35% width) */}
+                        <div className="w-1/3 flex flex-col gap-3 h-full">
+                          <div className="h-[calc(50%-6px)] overflow-hidden rounded-2xl border border-slate-900 relative group">
+                            <img
+                              src={project.image}
+                              alt={`${project.title} detail`}
+                              className="w-full h-full object-cover object-top filter brightness-[0.85] contrast-[1.05] group-hover:scale-102 transition-transform duration-500"
+                            />
+                          </div>
+                          <div className="h-[calc(50%-6px)] overflow-hidden rounded-2xl border border-slate-900 relative group">
+                            <img
+                              src={project.image}
+                              alt={`${project.title} detail zoom`}
+                              className="w-full h-full object-cover object-bottom filter brightness-[0.75] contrast-[1.1] group-hover:scale-102 transition-transform duration-500"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
                 </div>
-
-                {/* Git/Live Action triggers */}
-                <div className="flex items-center gap-4 pt-4 border-t border-slate-100 dark:border-slate-700">
-                  <a
-                    href={activeProject.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-600 hover:text-indigo-600 dark:text-slate-350 dark:hover:text-teal-400 transition-colors"
-                  >
-                    <Github className="w-4 h-4" /> GitHub Repository
-                  </a>
-                  {activeProject.liveUrl && activeProject.liveUrl !== '#' && (
-                    <a
-                      href={activeProject.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-teal-400 transition-colors ml-auto"
-                    >
-                      Live Demo <ExternalLink className="w-4 h-4" />
-                    </a>
-                  )}
-                </div>
-
-              </div>
-
-            </div>
-
-            {/* Previous slide manual button */}
-            <button
-              onClick={handlePrev}
-              className="absolute top-1/2 -left-4 lg:-left-6 -translate-y-1/2 p-3 rounded-full bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition-all hover:scale-105 active:scale-95"
-              aria-label="Previous Project"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-
-            {/* Next slide manual button */}
-            <button
-              onClick={handleNext}
-              className="absolute top-1/2 -right-4 lg:-right-6 -translate-y-1/2 p-3 rounded-full bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition-all hover:scale-105 active:scale-95"
-              aria-label="Next Project"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-
-            {/* Bottom dot indicators */}
-            <div className="flex justify-center items-center gap-2 mt-8">
-              {filteredProjects.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentIndex(idx)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                    currentIndex === idx
-                      ? 'w-8 bg-indigo-600 dark:bg-teal-400'
-                      : 'bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 dark:hover:bg-slate-600'
-                  }`}
-                  aria-label={`Go to project slide ${idx + 1}`}
-                ></button>
-              ))}
-            </div>
-
+              );
+            })}
           </div>
         ) : (
           <div className="text-center py-20 text-slate-500">

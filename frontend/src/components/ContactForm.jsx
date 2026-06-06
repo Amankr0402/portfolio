@@ -101,7 +101,7 @@ const ContactForm = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-white dark:bg-slate-900 transition-colors relative">
+    <section id="contact" className="py-20 bg-white dark:bg-transparent transition-colors relative">
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -119,7 +119,7 @@ const ContactForm = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
           
           {/* Left Column: Direct Info Card (Column span 5) */}
-          <div className="lg:col-span-5 flex flex-col justify-between bg-slate-50 dark:bg-slate-800 p-8 sm:p-10 rounded-3xl border border-slate-150/70 dark:border-slate-800/80">
+          <div className="lg:col-span-5 flex flex-col justify-between bg-slate-50 dark:bg-slate-900/40 dark:border-slate-800/80 backdrop-blur-md p-8 sm:p-10 rounded-3xl border border-slate-150/70">
             
             <div className="space-y-6">
               <h3 className="text-xl font-bold text-slate-900 dark:text-white">
@@ -157,14 +157,14 @@ const ContactForm = () => {
             </div>
 
             {/* College brand slogan */}
-            <div className="p-4 rounded-2xl bg-indigo-50/50 dark:bg-slate-900/40 border border-indigo-100/40 dark:border-slate-700/60 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+            <div className="p-4 rounded-2xl bg-indigo-50/50 dark:bg-slate-950/40 border border-indigo-100/40 dark:border-slate-800/50 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
               ⭐ Seeking entry-level Software Developer or Associate Data Analyst opportunities. Ready to relocate.
             </div>
 
           </div>
 
           {/* Right Column: Interactive Form Box (Column span 7) */}
-          <div className="lg:col-span-7 bg-slate-50 dark:bg-slate-800 p-8 sm:p-10 rounded-3xl border border-slate-150/70 dark:border-slate-800/80">
+          <div className="lg:col-span-7 bg-slate-50 dark:bg-slate-900/40 dark:border-slate-800/80 backdrop-blur-md p-8 sm:p-10 rounded-3xl border border-slate-150/70">
             <form onSubmit={handleSubmit} className="space-y-6">
               
               {/* Name Field */}
@@ -183,10 +183,10 @@ const ContactForm = () => {
                     value={formData.name}
                     onChange={handleChange}
                     disabled={isSubmitting}
-                    className={`w-full pl-10 pr-4 py-3 rounded-xl border bg-white dark:bg-slate-900 text-sm transition-all focus:outline-none focus:ring-2 ${
+                    className={`w-full pl-10 pr-4 py-3 rounded-xl border bg-white dark:bg-slate-950/50 dark:border-slate-800 text-sm transition-all focus:outline-none focus:ring-2 backdrop-blur-sm ${
                       errors.name 
                         ? 'border-rose-450 focus:ring-rose-200 dark:border-rose-900/60' 
-                        : 'border-slate-200 dark:border-slate-700 focus:border-indigo-500 focus:ring-indigo-100 dark:focus:border-teal-400 dark:focus:ring-teal-900/35'
+                        : 'border-slate-200 dark:border-slate-800 focus:border-indigo-500 focus:ring-indigo-100 dark:focus:border-teal-400 dark:focus:ring-teal-900/35'
                     }`}
                     placeholder="Aman Kumar"
                   />
@@ -214,10 +214,10 @@ const ContactForm = () => {
                     value={formData.email}
                     onChange={handleChange}
                     disabled={isSubmitting}
-                    className={`w-full pl-10 pr-4 py-3 rounded-xl border bg-white dark:bg-slate-900 text-sm transition-all focus:outline-none focus:ring-2 ${
+                    className={`w-full pl-10 pr-4 py-3 rounded-xl border bg-white dark:bg-slate-950/50 dark:border-slate-800 text-sm transition-all focus:outline-none focus:ring-2 backdrop-blur-sm ${
                       errors.email 
                         ? 'border-rose-450 focus:ring-rose-200 dark:border-rose-900/60' 
-                        : 'border-slate-200 dark:border-slate-700 focus:border-indigo-500 focus:ring-indigo-100 dark:focus:border-teal-450 dark:focus:ring-teal-900/35'
+                        : 'border-slate-200 dark:border-slate-800 focus:border-indigo-500 focus:ring-indigo-100 dark:focus:border-teal-450 dark:focus:ring-teal-900/35'
                     }`}
                     placeholder="amankumar.ak0402@gmail.com"
                   />
@@ -245,10 +245,10 @@ const ContactForm = () => {
                     value={formData.message}
                     onChange={handleChange}
                     disabled={isSubmitting}
-                    className={`w-full pl-10 pr-4 py-3 rounded-xl border bg-white dark:bg-slate-900 text-sm transition-all focus:outline-none focus:ring-2 ${
+                    className={`w-full pl-10 pr-4 py-3 rounded-xl border bg-white dark:bg-slate-950/50 dark:border-slate-800 text-sm transition-all focus:outline-none focus:ring-2 backdrop-blur-sm ${
                       errors.message 
                         ? 'border-rose-450 focus:ring-rose-200 dark:border-rose-900/60' 
-                        : 'border-slate-200 dark:border-slate-700 focus:border-indigo-500 focus:ring-indigo-100 dark:focus:border-teal-400 dark:focus:ring-teal-900/35'
+                        : 'border-slate-200 dark:border-slate-800 focus:border-indigo-500 focus:ring-indigo-100 dark:focus:border-teal-400 dark:focus:ring-teal-900/35'
                     }`}
                     placeholder="Write your message here (min. 10 characters)..."
                   ></textarea>

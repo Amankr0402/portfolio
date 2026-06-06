@@ -22,7 +22,7 @@ const Resume = () => {
   ];
 
   return (
-    <section id="resume" className="py-20 bg-slate-100/50 dark:bg-slate-900/50 transition-colors">
+    <section id="resume" className="py-20 bg-slate-100/50 dark:bg-transparent transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -40,7 +40,7 @@ const Resume = () => {
           
           {/* Left Side: Mock Resume Preview Visual Card (Column span 5) */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-sm bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-xl border border-slate-200/70 dark:border-slate-700/80 transition-transform duration-300 hover:scale-101 flex flex-col justify-between min-h-[480px]">
+            <div className="relative w-full max-w-sm bg-white dark:bg-slate-900/40 dark:border-slate-800/80 backdrop-blur-md p-8 rounded-3xl shadow-xl border border-slate-200/70 transition-transform duration-300 hover:scale-101 flex flex-col justify-between min-h-[480px]">
               
               {/* Header inside mock card */}
               <div className="space-y-4 text-center">

@@ -90,7 +90,7 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" className="py-20 bg-white dark:bg-slate-900 transition-colors">
+    <section id="skills" className="py-20 bg-white dark:bg-transparent transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -114,7 +114,7 @@ const Skills = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false, margin: "-60px" }}
-              className={`bg-slate-50 dark:bg-slate-800 p-8 rounded-2xl border border-slate-150/70 dark:border-slate-800/80 hover:shadow-md transition-all duration-300 ${
+              className={`bg-slate-50 dark:bg-slate-900/40 dark:border-slate-800/80 backdrop-blur-md p-8 rounded-2xl border border-slate-150/70 hover:shadow-md transition-all duration-300 ${
                 catIdx === 4 ? 'md:col-span-2 max-w-2xl mx-auto w-full' : ''
               }`}
             >
@@ -137,7 +137,7 @@ const Skills = () => {
                     whileHover={{ scale: 1.06, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 450, damping: 16 }}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/60 shadow-sm cursor-default"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/60 shadow-sm cursor-default backdrop-blur-sm"
                   >
                     <span className="w-2 h-2 rounded-full bg-indigo-500 dark:bg-teal-400"></span>
                     <span className="text-sm font-bold text-slate-800 dark:text-slate-200">

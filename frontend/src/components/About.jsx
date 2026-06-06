@@ -34,7 +34,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-slate-100/50 dark:bg-slate-900/50 transition-colors">
+    <section id="about" className="py-20 bg-slate-100/50 dark:bg-transparent transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -52,7 +52,7 @@ const About = () => {
           
           {/* About Text and Career Goal (Column span 6) */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
+            <div className="bg-white dark:bg-slate-900/40 dark:border-slate-800/80 backdrop-blur-md p-8 rounded-2xl shadow-sm border border-slate-100 transition-colors">
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
                 <Target className="w-5 h-5 text-indigo-600 dark:text-teal-400" /> Who I Am
               </h3>
@@ -67,7 +67,7 @@ const About = () => {
               </p>
             </div>
 
-            <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
+            <div className="bg-white dark:bg-slate-900/40 dark:border-slate-800/80 backdrop-blur-md p-8 rounded-2xl shadow-sm border border-slate-100 transition-colors">
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
                 <Award className="w-5 h-5 text-indigo-650 dark:text-teal-400" /> Career Goal
               </h3>
@@ -76,24 +76,24 @@ const About = () => {
               </p>
             </div>
 
-            <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
+            <div className="bg-white dark:bg-slate-900/40 dark:border-slate-800/80 backdrop-blur-md p-8 rounded-2xl shadow-sm border border-slate-100 transition-colors">
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
                 <Heart className="w-5 h-5 text-indigo-650 dark:text-teal-400" /> Interests & Hobbies
               </h3>
               <div className="grid grid-cols-2 gap-4">
-                <div className="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl">
+                <div className="p-3 bg-slate-50 dark:bg-slate-950/40 rounded-xl">
                   <p className="font-semibold text-slate-800 dark:text-slate-200 text-sm">Competitive Coding</p>
                   <p className="text-xs text-slate-500 dark:text-slate-400">Solving DSA problems in Java/Python</p>
                 </div>
-                <div className="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl">
+                <div className="p-3 bg-slate-50 dark:bg-slate-950/40 rounded-xl">
                   <p className="font-semibold text-slate-800 dark:text-slate-200 text-sm">UI/UX Layouts</p>
                   <p className="text-xs text-slate-500 dark:text-slate-400">Fascinated by clean dark mode pages</p>
                 </div>
-                <div className="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl">
+                <div className="p-3 bg-slate-50 dark:bg-slate-950/40 rounded-xl">
                   <p className="font-semibold text-slate-800 dark:text-slate-200 text-sm">Designing through Figma</p>
                   <p className="text-xs text-slate-500 dark:text-slate-400">Creating sleek vector layouts & wireframes</p>
                 </div>
-                <div className="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl">
+                <div className="p-3 bg-slate-50 dark:bg-slate-950/40 rounded-xl">
                   <p className="font-semibold text-slate-800 dark:text-slate-200 text-sm">Open Source</p>
                   <p className="text-xs text-slate-500 dark:text-slate-400">Contributing simple fixes in React</p>
                 </div>
@@ -103,7 +103,7 @@ const About = () => {
 
           {/* Education Timeline (Column span 6) */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
+            <div className="bg-white dark:bg-slate-900/40 dark:border-slate-800/80 backdrop-blur-md p-8 rounded-2xl shadow-sm border border-slate-100 transition-colors">
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
                 <GraduationCap className="w-5 h-5 text-indigo-600 dark:text-teal-400" /> Education & Experience
               </h3>
@@ -112,7 +112,7 @@ const About = () => {
                 {educationTimeline.map((edu, idx) => (
                   <div key={idx} className="relative group">
                     {/* Circle Indicator on the line */}
-                    <div className="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full border-2 border-indigo-650 dark:border-teal-400 bg-white dark:bg-slate-850 group-hover:scale-125 transition-transform duration-200"></div>
+                    <div className="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full border-2 border-indigo-650 dark:border-teal-400 bg-white dark:bg-slate-950 group-hover:scale-125 transition-transform duration-200"></div>
                     
                     {/* Degree and Institution */}
                     <span className="inline-block px-2.5 py-0.5 rounded text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-400 mb-2">

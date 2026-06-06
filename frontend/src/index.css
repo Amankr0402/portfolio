@@ -8,7 +8,14 @@
   }
   
   body {
-    @apply bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 font-sans transition-colors duration-300;
+    @apply bg-slate-50 text-slate-800 dark:text-slate-100 font-sans transition-colors duration-300;
+  }
+
+  .dark body {
+    background-color: #020617;
+    background-image: radial-gradient(circle at center, #0a1f3d 0%, #030a1c 55%, #010409 100%);
+    background-attachment: fixed;
+    background-size: cover;
   }
   
   h1, h2, h3, h4, h5, h6 {

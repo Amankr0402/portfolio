@@ -66,3 +66,6 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running in development mode on port ${PORT}`);
 });
+
+// Export app for serverless deployments (Vercel)
+module.exports = app;
