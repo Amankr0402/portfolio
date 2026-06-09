@@ -14,6 +14,16 @@ const localMockProjects = [
     liveUrl: 'https://it-developer-project.vercel.app',
     image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&auto=format&fit=crop&q=80'
   },
+  {
+    _id: 'mock-s2',
+    title: 'SkillBridge - Micro Internship Platform',
+    description: 'Built a full-stack micro-internship platform connecting ambitious students with innovative companies for short-term, impactful internships. Features JWT authentication, company/student dashboards, internship listings, application tracking, and verified certificate generation.',
+    category: 'Software Development',
+    techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS', 'JWT', 'Vercel', 'Render'],
+    githubUrl: 'https://github.com/Amankr0402/skill-bridge',
+    liveUrl: 'https://skill-bridge-sigma-ochre.vercel.app',
+    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&auto=format&fit=crop&q=80'
+  },
 
   // --- DATA ANALYST PROJECTS ---
   {
