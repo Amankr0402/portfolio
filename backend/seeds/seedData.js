@@ -30,8 +30,8 @@ const sampleProjects = [
     description: 'Developed an interactive weather dashboard using Microsoft Power BI. Cleaned meteorological metrics using Power Query, developed DAX measures, and visualized live temperature, humidity, AQI, and rainfall.',
     category: 'Data Analyst',
     techStack: ['Power BI', 'Power Query', 'DAX', 'Data Analysis', 'Data Cleaning'],
-    githubUrl: 'https://github.com/example/weather-dashboard',
-    liveUrl: 'https://example.com/weather-dashboard',
+    githubUrl: 'https://github.com/Amankr0402/weather-dashboard',
+    liveUrl: 'https://www.linkedin.com/posts/aman-kumar-a864b335a_powerbi-dataanalytics-businessintelligence-ugcPost-7470055878252097536-jSyP/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFlrJUYBkftNIXA2InM2dVMV3E4rWeBYWvA',
     image: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?w=600&auto=format&fit=crop&q=80'
   },
   {
