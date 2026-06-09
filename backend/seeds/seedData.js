@@ -33,15 +33,6 @@ const sampleProjects = [
     githubUrl: 'https://github.com/Amankr0402/weather-dashboard',
     liveUrl: 'https://www.linkedin.com/posts/aman-kumar-a864b335a_powerbi-dataanalytics-businessintelligence-ugcPost-7470055878252097536-jSyP/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFlrJUYBkftNIXA2InM2dVMV3E4rWeBYWvA',
     image: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?w=600&auto=format&fit=crop&q=80'
-  },
-  {
-    title: 'E-Commerce Sales Dashboard',
-    description: 'An interactive, multi-sheet dashboard analyzing online sales operations, profit margins, product performances, and customer retention. Supports regional and category-level filtering.',
-    category: 'Data Analyst',
-    techStack: ['Excel', 'Power BI', 'SQL', 'Data Modeling'],
-    githubUrl: 'https://github.com/example/sales-dashboard',
-    liveUrl: 'https://example.com/sales-dashboard',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format&fit=crop&q=80'
   }
 ];
 
