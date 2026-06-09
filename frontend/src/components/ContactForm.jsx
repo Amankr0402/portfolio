@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Send, User, Mail, MessageSquare, AlertCircle, CheckCircle2 } from 'lucide-react';
-import axios from 'axios';
 
 const ContactForm = () => {
   // Input fields state

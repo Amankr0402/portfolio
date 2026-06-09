@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Award, ExternalLink, Calendar, ShieldCheck, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import axios from 'axios';
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/_/backend' : 'http://localhost:5000');
 
 // High-quality local fallback data if backend is offline
 const localMockCertificates = [
@@ -50,28 +47,8 @@ const localMockCertificates = [
 ];
 
 const Certificates = () => {
-  const [certificates, setCertificates] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [certificates, setCertificates] = useState(localMockCertificates);
   const [activeModalImage, setActiveModalImage] = useState(null);
-
-  useEffect(() => {
-    const fetchCertificates = async () => {
-      try {
-        const res = await axios.get(`${API_BASE_URL}/api/certificates`);
-        if (res.data && res.data.success && res.data.data.length > 0) {
-          setCertificates(res.data.data);
-        } else {
-          setCertificates(localMockCertificates);
-        }
-      } catch (error) {
-        console.warn('Backend server down, loading local mock certificates database...', error.message);
-        setCertificates(localMockCertificates);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchCertificates();
-  }, []);
 
   return (
     <section id="certificates" className="py-20 bg-white dark:bg-transparent transition-colors">
@@ -88,13 +65,8 @@ const Certificates = () => {
           <div className="h-1.5 w-20 bg-indigo-600 dark:bg-teal-400 mx-auto rounded-full"></div>
         </div>
 
-        {isLoading ? (
-          <div className="flex justify-center items-center py-10">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-600 dark:border-teal-400"></div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {certificates.map((cert) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {certificates.map((cert) => (
               <div
                 key={cert._id}
                 className="group bg-slate-50 dark:bg-slate-900/40 dark:border-slate-800/80 backdrop-blur-md rounded-2xl overflow-hidden border border-slate-150/70 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
@@ -163,8 +135,8 @@ const Certificates = () => {
 
               </div>
             ))}
-          </div>
-        )}
+        </div>
+
 
         {/* Dynamic Image Popup Preview Modal */}
         <AnimatePresence>

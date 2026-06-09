@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Github, ExternalLink, Code2, BarChart3 } from 'lucide-react';
-import axios from 'axios';
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/_/backend' : 'http://localhost:5000');
 
 // High-quality local fallback data if backend is offline or loading fails
 const localMockProjects = [
@@ -42,43 +39,14 @@ const localMockProjects = [
 ];
 
 const ProjectsSlider = () => {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState(localMockProjects);
   const [activeCategory, setActiveCategory] = useState('All');
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Fetch projects from DB
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const res = await axios.get(`${API_BASE_URL}/api/projects`);
-        if (res.data && res.data.success && res.data.data.length > 0) {
-          setProjects(res.data.data);
-        } else {
-          setProjects(localMockProjects);
-        }
-      } catch (error) {
-        console.warn('Backend server down, loading local mock projects database...', error.message);
-        setProjects(localMockProjects);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchProjects();
-  }, []);
 
   // Filter projects by selected category
   const filteredProjects = projects.filter(project => {
     if (activeCategory === 'All') return true;
     return project.category === activeCategory;
   });
-
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center py-20">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-600 dark:border-teal-400"></div>
-      </div>
-    );
-  }
 
   return (
     <section id="projects" className="py-20 bg-white dark:bg-transparent transition-colors">
