@@ -8,30 +8,18 @@ const ThemeContext = createContext();
  */
 export const ThemeProvider = ({ children }) => {
   // Check if a theme choice was saved in localStorage, or default to dark mode for modern visual appeal
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      return savedTheme === 'dark';
-    }
-    // Default to dark mode (recommended for a modern look)
-    return true; 
-  });
+  const [isDarkMode] = useState(true);
 
   // Apply changes to the HTML document element whenever the state changes
   useEffect(() => {
     const root = window.document.documentElement;
-    if (isDarkMode) {
-      root.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      root.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [isDarkMode]);
+    root.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
+  }, []);
 
   // Toggle theme handler
   const toggleTheme = () => {
-    setIsDarkMode(prev => !prev);
+    // Always dark mode
   };
 
   return (

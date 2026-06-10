@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon, Briefcase } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
+import { Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { isDarkMode, toggleTheme } = useTheme();
 
   // Track scrolling to add background color and shadow to navbar
   useEffect(() => {
@@ -53,27 +51,10 @@ const Navbar = () => {
               </a>
             ))}
 
-            {/* Dark/Light Mode Toggle (With Rotation Animation) */}
-            <button
-              onClick={toggleTheme}
-              className="p-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all duration-300 transform hover:scale-110 active:scale-90 hover:rotate-12"
-              aria-label="Toggle Theme"
-            >
-              {isDarkMode ? <Sun className="w-5 h-5 text-amber-400 animate-pulse" /> : <Moon className="w-5 h-5 text-indigo-600" />}
-            </button>
           </div>
 
-          {/* Mobile Menu & Theme button container */}
-          <div className="flex md:hidden items-center gap-2">
-            {/* Dark/Light Mode Toggle Mobile */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 transition-all duration-200"
-              aria-label="Toggle Theme Mobile"
-            >
-              {isDarkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-600" />}
-            </button>
-
+          {/* Mobile Menu Button Container */}
+          <div className="flex md:hidden items-center">
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
