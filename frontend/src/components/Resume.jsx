@@ -78,7 +78,7 @@ const Resume = () => {
               {/* Mock Resume Action trigger */}
               <div className="text-center">
                 <a
-                  href="/resume.pdf"
+                  href="/Aman_kumar_Resume.pdf"
                   download="Aman_Kumar_Resume.pdf"
                   className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-indigo-600 text-white hover:bg-indigo-500 active:scale-97 font-bold shadow-md shadow-indigo-600/10 transition-all duration-200"
                 >

@@ -45,7 +45,7 @@ final portfolio/
 │
 ├── frontend/                 # React.js SPA (Vite + Tailwind)
 │   ├── public/               
-│   │   └── resume.pdf        # Downloadable resume placeholder
+│   │   └── Aman_kumar_Resume.pdf # Downloadable resume file
 │   ├── src/                  
 │   │   ├── components/       # Reusable components
 │   │   │   ├── Navbar.jsx    # Responsive glass navbar
